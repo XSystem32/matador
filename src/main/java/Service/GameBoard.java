@@ -113,12 +113,6 @@ public class GameBoard {
         gui.addPlayer(guiPlayers[player.getPlayerId()]);
     }
 
-    public void rollDice() {
-        Dice dice = new Dice();
-        gui.getUserButtonPressed("", "Kast terningerne");
-        gui.setDice(dice.diceValue(),dice.diceValue());
-    }
-
     public void movePlayerAndCastDice() {
         Dice dice = new Dice();
         GUI_Field[] fields = gui.getFields();
