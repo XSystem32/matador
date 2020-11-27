@@ -1,6 +1,6 @@
 import Service.GameBoard;
 
-public class GuiTest {
+public class Main {
 
     public static void main(String[] args) {
 
