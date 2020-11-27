@@ -15,7 +15,7 @@ public class GameBoard {
     public GameBoard() {
         gui = new GUI(customFields());
         setupPlayers();
-        movePlayer();
+        movePlayerAndCastDice();
     }
 
     public GUI_Field[] customFields() {
@@ -119,66 +119,502 @@ public class GameBoard {
         gui.setDice(dice.diceValue(),dice.diceValue());
     }
 
-    public void movePlayer() {
+    public void movePlayerAndCastDice() {
         Dice dice = new Dice();
         GUI_Field[] fields = gui.getFields();
 
+        if (guiPlayers.length == 2) {
 
+            while (guiPlayers[0].getBalance() < 500 || guiPlayers[1].getBalance() < 500) {
+                int p1d1 = dice.diceValue();
+                int p1d2 = dice.diceValue();
 
+                int p2d1 = dice.diceValue();
+                int p2d2 = dice.diceValue();
 
-        while (true) {
-            int a = dice.diceValue();
-            int b = dice.diceValue();
+                int playerOneSum = p1d1 + p1d2;
+                int playerTwoSum = p2d1 + p2d2;
 
-            int c = a + b;
-            for (GUI_Player guiPlayer : guiPlayers) {
-                gui.getUserButtonPressed("Kast terningerne", "Kast");
-                gui.setDice(a, b);
+                gui.getUserButtonPressed(guiPlayers[0].getName() + ", kast terningerne", "Kast");
+                gui.setDice(p1d1, p1d2);
 
-                switch (c) {
+                switch (playerOneSum) {
                     case 2:
-                        guiPlayer.setBalance(guiPlayer.getBalance() + 10);
-                        guiPlayer.getCar().setPosition(fields[1]);
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 10);
+                        guiPlayers[0].getCar().setPosition(fields[0]);
                         break;
                     case 3:
-                        guiPlayer.setBalance(guiPlayer.getBalance() + 15);
-                        guiPlayer.getCar().setPosition(fields[3]);
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 15);
+                        guiPlayers[0].getCar().setPosition(fields[3]);
                         break;
                     case 4:
-                        guiPlayer.setBalance(guiPlayer.getBalance() - 20);
-                        guiPlayer.getCar().setPosition(fields[5]);
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 20);
+                        guiPlayers[0].getCar().setPosition(fields[5]);
                         break;
                     case 5:
-                        guiPlayer.setBalance(guiPlayer.getBalance() + 5);
-                        guiPlayer.getCar().setPosition(fields[7]);
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 5);
+                        guiPlayers[0].getCar().setPosition(fields[7]);
                         break;
                     case 6:
-                        guiPlayer.setBalance(guiPlayer.getBalance() + 50);
-                        guiPlayer.getCar().setPosition(fields[10]);
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 50);
+                        guiPlayers[0].getCar().setPosition(fields[10]);
                         break;
                     case 7:
-                        guiPlayer.setBalance(guiPlayer.getBalance() + 25);
-                        guiPlayer.getCar().setPosition(fields[15]);
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 25);
+                        guiPlayers[0].getCar().setPosition(fields[15]);
                         break;
                     case 8:
-                        guiPlayer.setBalance(guiPlayer.getBalance() + 12);
-                        guiPlayer.getCar().setPosition(fields[11]);
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 12);
+                        guiPlayers[0].getCar().setPosition(fields[11]);
                         break;
                     case 9:
-                        guiPlayer.setBalance(guiPlayer.getBalance() + 18);
-                        guiPlayer.getCar().setPosition(fields[13]);
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 18);
+                        guiPlayers[0].getCar().setPosition(fields[13]);
                         break;
                     case 10:
-                        guiPlayer.setBalance(guiPlayer.getBalance() + 9);
-                        guiPlayer.getCar().setPosition(fields[19]);
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 9);
+                        guiPlayers[0].getCar().setPosition(fields[19]);
                         break;
                     case 11:
-                        guiPlayer.setBalance(guiPlayer.getBalance() + 33);
-                        guiPlayer.getCar().setPosition(fields[6]);
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 33);
+                        guiPlayers[0].getCar().setPosition(fields[6]);
                         break;
                     case 12:
-                        guiPlayer.setBalance(guiPlayer.getBalance() + 44);
-                        guiPlayer.getCar().setPosition(fields[8]);
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 44);
+                        guiPlayers[0].getCar().setPosition(fields[8]);
+                        break;
+                }
+                gui.getUserButtonPressed(guiPlayers[1].getName() + ", kast terningerne", "Kast");
+                gui.setDice(p2d1, p2d2);
+
+                switch (playerTwoSum) {
+                    case 2:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 10);
+                        guiPlayers[1].getCar().setPosition(fields[0]);
+                        break;
+                    case 3:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 15);
+                        guiPlayers[1].getCar().setPosition(fields[3]);
+                        break;
+                    case 4:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 20);
+                        guiPlayers[1].getCar().setPosition(fields[5]);
+                        break;
+                    case 5:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 5);
+                        guiPlayers[1].getCar().setPosition(fields[7]);
+                        break;
+                    case 6:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 50);
+                        guiPlayers[1].getCar().setPosition(fields[10]);
+                        break;
+                    case 7:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 25);
+                        guiPlayers[1].getCar().setPosition(fields[15]);
+                        break;
+                    case 8:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 12);
+                        guiPlayers[1].getCar().setPosition(fields[11]);
+                        break;
+                    case 9:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 18);
+                        guiPlayers[1].getCar().setPosition(fields[13]);
+                        break;
+                    case 10:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 9);
+                        guiPlayers[1].getCar().setPosition(fields[19]);
+                        break;
+                    case 11:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 33);
+                        guiPlayers[1].getCar().setPosition(fields[6]);
+                        break;
+                    case 12:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 44);
+                        guiPlayers[1].getCar().setPosition(fields[8]);
+                        break;
+                }
+            }
+        } else if (guiPlayers.length == 3) {
+            while (guiPlayers[0].getBalance() < 500 || guiPlayers[1].getBalance() < 500 || guiPlayers[2].getBalance() < 500) {
+                int p1d1 = dice.diceValue();
+                int p1d2 = dice.diceValue();
+
+                int p2d1 = dice.diceValue();
+                int p2d2 = dice.diceValue();
+
+                int p3d1 = dice.diceValue();
+                int p3d2 = dice.diceValue();
+
+                int playerOneSum = p1d1 + p1d2;
+                int playerTwoSum = p2d1 + p2d2;
+                int playerThreeSum = p3d1 + p3d2;
+
+                gui.getUserButtonPressed(guiPlayers[0].getName() + ", kast terningerne", "Kast");
+                gui.setDice(p1d1, p1d2);
+
+                switch (playerOneSum) {
+                    case 2:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 10);
+                        guiPlayers[0].getCar().setPosition(fields[0]);
+                        break;
+                    case 3:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 15);
+                        guiPlayers[0].getCar().setPosition(fields[3]);
+                        break;
+                    case 4:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 20);
+                        guiPlayers[0].getCar().setPosition(fields[5]);
+                        break;
+                    case 5:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 5);
+                        guiPlayers[0].getCar().setPosition(fields[7]);
+                        break;
+                    case 6:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 50);
+                        guiPlayers[0].getCar().setPosition(fields[10]);
+                        break;
+                    case 7:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 25);
+                        guiPlayers[0].getCar().setPosition(fields[15]);
+                        break;
+                    case 8:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 12);
+                        guiPlayers[0].getCar().setPosition(fields[11]);
+                        break;
+                    case 9:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 18);
+                        guiPlayers[0].getCar().setPosition(fields[13]);
+                        break;
+                    case 10:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 9);
+                        guiPlayers[0].getCar().setPosition(fields[19]);
+                        break;
+                    case 11:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 33);
+                        guiPlayers[0].getCar().setPosition(fields[6]);
+                        break;
+                    case 12:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 44);
+                        guiPlayers[0].getCar().setPosition(fields[8]);
+                        break;
+                }
+                gui.getUserButtonPressed(guiPlayers[1].getName() + ", kast terningerne", "Kast");
+                gui.setDice(p2d1, p2d2);
+
+                switch (playerTwoSum) {
+                    case 2:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 10);
+                        guiPlayers[1].getCar().setPosition(fields[0]);
+                        break;
+                    case 3:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 15);
+                        guiPlayers[1].getCar().setPosition(fields[3]);
+                        break;
+                    case 4:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 20);
+                        guiPlayers[1].getCar().setPosition(fields[5]);
+                        break;
+                    case 5:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 5);
+                        guiPlayers[1].getCar().setPosition(fields[7]);
+                        break;
+                    case 6:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 50);
+                        guiPlayers[1].getCar().setPosition(fields[10]);
+                        break;
+                    case 7:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 25);
+                        guiPlayers[1].getCar().setPosition(fields[15]);
+                        break;
+                    case 8:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 12);
+                        guiPlayers[1].getCar().setPosition(fields[11]);
+                        break;
+                    case 9:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 18);
+                        guiPlayers[1].getCar().setPosition(fields[13]);
+                        break;
+                    case 10:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 9);
+                        guiPlayers[1].getCar().setPosition(fields[19]);
+                        break;
+                    case 11:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 33);
+                        guiPlayers[1].getCar().setPosition(fields[6]);
+                        break;
+                    case 12:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 44);
+                        guiPlayers[1].getCar().setPosition(fields[8]);
+                        break;
+                }
+
+                gui.getUserButtonPressed(guiPlayers[2].getName() + ", kast terningerne", "Kast");
+                gui.setDice(p3d1, p3d2);
+
+                switch (playerThreeSum) {
+                    case 2:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 10);
+                        guiPlayers[2].getCar().setPosition(fields[0]);
+                        break;
+                    case 3:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 15);
+                        guiPlayers[2].getCar().setPosition(fields[3]);
+                        break;
+                    case 4:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() - 20);
+                        guiPlayers[2].getCar().setPosition(fields[5]);
+                        break;
+                    case 5:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 5);
+                        guiPlayers[2].getCar().setPosition(fields[7]);
+                        break;
+                    case 6:
+                        guiPlayers[2].setBalance(guiPlayers[1].getBalance() + 50);
+                        guiPlayers[2].getCar().setPosition(fields[10]);
+                        break;
+                    case 7:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() - 25);
+                        guiPlayers[2].getCar().setPosition(fields[15]);
+                        break;
+                    case 8:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 12);
+                        guiPlayers[2].getCar().setPosition(fields[11]);
+                        break;
+                    case 9:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() - 18);
+                        guiPlayers[2].getCar().setPosition(fields[13]);
+                        break;
+                    case 10:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 9);
+                        guiPlayers[2].getCar().setPosition(fields[19]);
+                        break;
+                    case 11:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 33);
+                        guiPlayers[2].getCar().setPosition(fields[6]);
+                        break;
+                    case 12:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() - 44);
+                        guiPlayers[2].getCar().setPosition(fields[8]);
+                        break;
+                }
+            }
+
+
+        } else if (guiPlayers.length == 4) {
+            while (guiPlayers[0].getBalance() < 500 || guiPlayers[1].getBalance() < 500 || guiPlayers[2].getBalance() < 500 || guiPlayers[3].getBalance() < 500) {
+                int p1d1 = dice.diceValue();
+                int p1d2 = dice.diceValue();
+
+                int p2d1 = dice.diceValue();
+                int p2d2 = dice.diceValue();
+
+                int p3d1 = dice.diceValue();
+                int p3d2 = dice.diceValue();
+
+                int p4d1 = dice.diceValue();
+                int p4d2 = dice.diceValue();
+
+                int playerOneSum = p1d1 + p1d2;
+                int playerTwoSum = p2d1 + p2d2;
+                int playerThreeSum = p3d1 + p3d2;
+                int playerFourSum = p4d1 + p4d2;
+
+                gui.getUserButtonPressed(guiPlayers[0].getName() + ", kast terningerne", "Kast");
+                gui.setDice(p1d1, p1d2);
+
+                switch (playerOneSum) {
+                    case 2:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 10);
+                        guiPlayers[0].getCar().setPosition(fields[0]);
+                        break;
+                    case 3:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 15);
+                        guiPlayers[0].getCar().setPosition(fields[3]);
+                        break;
+                    case 4:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 20);
+                        guiPlayers[0].getCar().setPosition(fields[5]);
+                        break;
+                    case 5:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 5);
+                        guiPlayers[0].getCar().setPosition(fields[7]);
+                        break;
+                    case 6:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 50);
+                        guiPlayers[0].getCar().setPosition(fields[10]);
+                        break;
+                    case 7:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 25);
+                        guiPlayers[0].getCar().setPosition(fields[15]);
+                        break;
+                    case 8:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 12);
+                        guiPlayers[0].getCar().setPosition(fields[11]);
+                        break;
+                    case 9:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 18);
+                        guiPlayers[0].getCar().setPosition(fields[13]);
+                        break;
+                    case 10:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 9);
+                        guiPlayers[0].getCar().setPosition(fields[19]);
+                        break;
+                    case 11:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() + 33);
+                        guiPlayers[0].getCar().setPosition(fields[6]);
+                        break;
+                    case 12:
+                        guiPlayers[0].setBalance(guiPlayers[0].getBalance() - 44);
+                        guiPlayers[0].getCar().setPosition(fields[8]);
+                        break;
+                }
+                gui.getUserButtonPressed(guiPlayers[1].getName() + ", kast terningerne", "Kast");
+                gui.setDice(p2d1, p2d2);
+
+                switch (playerTwoSum) {
+                    case 2:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 10);
+                        guiPlayers[1].getCar().setPosition(fields[0]);
+                        break;
+                    case 3:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 15);
+                        guiPlayers[1].getCar().setPosition(fields[3]);
+                        break;
+                    case 4:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 20);
+                        guiPlayers[1].getCar().setPosition(fields[5]);
+                        break;
+                    case 5:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 5);
+                        guiPlayers[1].getCar().setPosition(fields[7]);
+                        break;
+                    case 6:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 50);
+                        guiPlayers[1].getCar().setPosition(fields[10]);
+                        break;
+                    case 7:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 25);
+                        guiPlayers[1].getCar().setPosition(fields[15]);
+                        break;
+                    case 8:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 12);
+                        guiPlayers[1].getCar().setPosition(fields[11]);
+                        break;
+                    case 9:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 18);
+                        guiPlayers[1].getCar().setPosition(fields[13]);
+                        break;
+                    case 10:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 9);
+                        guiPlayers[1].getCar().setPosition(fields[19]);
+                        break;
+                    case 11:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() + 33);
+                        guiPlayers[1].getCar().setPosition(fields[6]);
+                        break;
+                    case 12:
+                        guiPlayers[1].setBalance(guiPlayers[1].getBalance() - 44);
+                        guiPlayers[1].getCar().setPosition(fields[8]);
+                        break;
+                }
+
+                gui.getUserButtonPressed(guiPlayers[2].getName() + ", kast terningerne", "Kast");
+                gui.setDice(p3d1, p3d2);
+
+                switch (playerThreeSum) {
+                    case 2:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 10);
+                        guiPlayers[2].getCar().setPosition(fields[0]);
+                        break;
+                    case 3:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 15);
+                        guiPlayers[2].getCar().setPosition(fields[3]);
+                        break;
+                    case 4:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() - 20);
+                        guiPlayers[2].getCar().setPosition(fields[5]);
+                        break;
+                    case 5:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 5);
+                        guiPlayers[2].getCar().setPosition(fields[7]);
+                        break;
+                    case 6:
+                        guiPlayers[2].setBalance(guiPlayers[1].getBalance() + 50);
+                        guiPlayers[2].getCar().setPosition(fields[10]);
+                        break;
+                    case 7:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() - 25);
+                        guiPlayers[2].getCar().setPosition(fields[15]);
+                        break;
+                    case 8:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 12);
+                        guiPlayers[2].getCar().setPosition(fields[11]);
+                        break;
+                    case 9:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() - 18);
+                        guiPlayers[2].getCar().setPosition(fields[13]);
+                        break;
+                    case 10:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 9);
+                        guiPlayers[2].getCar().setPosition(fields[19]);
+                        break;
+                    case 11:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() + 33);
+                        guiPlayers[2].getCar().setPosition(fields[6]);
+                        break;
+                    case 12:
+                        guiPlayers[2].setBalance(guiPlayers[2].getBalance() - 44);
+                        guiPlayers[2].getCar().setPosition(fields[8]);
+                        break;
+                }
+
+                gui.getUserButtonPressed(guiPlayers[3].getName() + ", kast terningerne", "Kast");
+                gui.setDice(p4d1, p4d2);
+
+                switch (playerFourSum) {
+                    case 2:
+                        guiPlayers[3].setBalance(guiPlayers[3].getBalance() + 10);
+                        guiPlayers[3].getCar().setPosition(fields[0]);
+                        break;
+                    case 3:
+                        guiPlayers[3].setBalance(guiPlayers[3].getBalance() + 15);
+                        guiPlayers[3].getCar().setPosition(fields[3]);
+                        break;
+                    case 4:
+                        guiPlayers[3].setBalance(guiPlayers[2].getBalance() - 20);
+                        guiPlayers[3].getCar().setPosition(fields[5]);
+                        break;
+                    case 5:
+                        guiPlayers[3].setBalance(guiPlayers[3].getBalance() + 5);
+                        guiPlayers[3].getCar().setPosition(fields[7]);
+                        break;
+                    case 6:
+                        guiPlayers[3].setBalance(guiPlayers[3].getBalance() + 50);
+                        guiPlayers[3].getCar().setPosition(fields[10]);
+                        break;
+                    case 7:
+                        guiPlayers[3].setBalance(guiPlayers[3].getBalance() - 25);
+                        guiPlayers[3].getCar().setPosition(fields[15]);
+                        break;
+                    case 8:
+                        guiPlayers[3].setBalance(guiPlayers[3].getBalance() + 12);
+                        guiPlayers[3].getCar().setPosition(fields[11]);
+                        break;
+                    case 9:
+                        guiPlayers[3].setBalance(guiPlayers[3].getBalance() - 18);
+                        guiPlayers[3].getCar().setPosition(fields[13]);
+                        break;
+                    case 10:
+                        guiPlayers[3].setBalance(guiPlayers[3].getBalance() + 9);
+                        guiPlayers[3].getCar().setPosition(fields[19]);
+                        break;
+                    case 11:
+                        guiPlayers[3].setBalance(guiPlayers[3].getBalance() + 33);
+                        guiPlayers[3].getCar().setPosition(fields[6]);
+                        break;
+                    case 12:
+                        guiPlayers[3].setBalance(guiPlayers[3].getBalance() - 44);
+                        guiPlayers[3].getCar().setPosition(fields[8]);
                         break;
                 }
             }
