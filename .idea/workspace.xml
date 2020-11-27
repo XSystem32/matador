@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44ab8b7c-a24a-4db4-af57-ee09c9ecc86f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Service/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Service/GameBoard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +82,7 @@
       <updated>1606317551093</updated>
       <workItem from="1606317553712" duration="5276000" />
       <workItem from="1606441325473" duration="10402000" />
-      <workItem from="1606495685383" duration="19413000" />
+      <workItem from="1606495685383" duration="19776000" />
     </task>
     <servers />
   </component>

@@ -124,6 +124,8 @@ public class GameBoard {
         GUI_Field[] fields = gui.getFields();
 
         if (guiPlayers.length == 2) {
+            guiPlayers[0].getCar().setPosition(fields[0]);
+            guiPlayers[1].getCar().setPosition(fields[0]);
 
             while (guiPlayers[0].getBalance() < 500 || guiPlayers[1].getBalance() < 500) {
                 int p1d1 = dice.diceValue();
@@ -235,6 +237,10 @@ public class GameBoard {
                 }
             }
         } else if (guiPlayers.length == 3) {
+            guiPlayers[0].getCar().setPosition(fields[0]);
+            guiPlayers[1].getCar().setPosition(fields[0]);
+            guiPlayers[2].getCar().setPosition(fields[0]);
+
             while (guiPlayers[0].getBalance() < 500 || guiPlayers[1].getBalance() < 500 || guiPlayers[2].getBalance() < 500) {
                 int p1d1 = dice.diceValue();
                 int p1d2 = dice.diceValue();
@@ -401,6 +407,11 @@ public class GameBoard {
 
 
         } else if (guiPlayers.length == 4) {
+            guiPlayers[0].getCar().setPosition(fields[0]);
+            guiPlayers[1].getCar().setPosition(fields[0]);
+            guiPlayers[2].getCar().setPosition(fields[0]);
+            guiPlayers[3].getCar().setPosition(fields[0]);
+
             while (guiPlayers[0].getBalance() < 500 || guiPlayers[1].getBalance() < 500 || guiPlayers[2].getBalance() < 500 || guiPlayers[3].getBalance() < 500) {
                 int p1d1 = dice.diceValue();
                 int p1d2 = dice.diceValue();
