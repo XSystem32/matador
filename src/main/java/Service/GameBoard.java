@@ -132,7 +132,7 @@ public class GameBoard {
         while (true) {
             for (GUI_Player guiPlayer : guiPlayers) {
                 gui.getUserButtonPressed("Kast terningerne", "Kast");
-                gui.setDice(a, b);
+                gui.setDice(dice.diceValue(), dice.diceValue());
 
                 switch (c) {
                     case 2:
