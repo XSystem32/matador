@@ -15,7 +15,7 @@ public class GameBoard {
     public GameBoard() {
         gui = new GUI(customFields());
         setupPlayers();
-        rollDice();
+        movePlayer();
     }
 
     public GUI_Field[] customFields() {
@@ -120,10 +120,70 @@ public class GameBoard {
     }
 
     public void movePlayer() {
-        GUI_Field[] fields = customFields();
-        for (int i = 0; i < guiPlayers.length; i++) {
-            guiPlayers[i].getCar().setPosition(fields[0]);
+        Dice dice = new Dice();
+        GUI_Field[] fields = gui.getFields();
+
+        gui.getUserButtonPressed("Kast terningerne", "Kast");
+
+        int a = dice.diceValue();
+        int b = dice.diceValue();
+
+        int c = a + b;
+
+        gui.setDice(a, b);
+
+        for (GUI_Player guiPlayer : guiPlayers) {
+
+            guiPlayer.getCar().setPosition(fields[0]);
+
+            switch (c) {
+                case 2:
+                    guiPlayer.setBalance(guiPlayer.getBalance() + 10);
+                    guiPlayer.getCar().setPosition(fields[1]);
+                    break;
+                case 3:
+                    guiPlayer.setBalance(guiPlayer.getBalance() + 15);
+                    guiPlayer.getCar().setPosition(fields[3]);
+                    break;
+                case 4:
+                    guiPlayer.setBalance(guiPlayer.getBalance() - 20);
+                    guiPlayer.getCar().setPosition(fields[5]);
+                    break;
+                case 5:
+                    guiPlayer.setBalance(guiPlayer.getBalance() + 5);
+                    guiPlayer.getCar().setPosition(fields[7]);
+                    break;
+                case 6:
+                    guiPlayer.setBalance(guiPlayer.getBalance() + 50);
+                    guiPlayer.getCar().setPosition(fields[10]);
+                    break;
+                case 7:
+                    guiPlayer.setBalance(guiPlayer.getBalance() + 25);
+                    guiPlayer.getCar().setPosition(fields[15]);
+                    break;
+                case 8:
+                    guiPlayer.setBalance(guiPlayer.getBalance() + 12);
+                    guiPlayer.getCar().setPosition(fields[11]);
+                    break;
+                case 9:
+                    guiPlayer.setBalance(guiPlayer.getBalance() + 18);
+                    guiPlayer.getCar().setPosition(fields[13]);
+                    break;
+                case 10:
+                    guiPlayer.setBalance(guiPlayer.getBalance() + 9);
+                    guiPlayer.getCar().setPosition(fields[19]);
+                    break;
+                case 11:
+                    guiPlayer.setBalance(guiPlayer.getBalance() + 33);
+                    guiPlayer.getCar().setPosition(fields[6]);
+                    break;
+                case 12:
+                    guiPlayer.setBalance(guiPlayer.getBalance() + 44);
+                    guiPlayer.getCar().setPosition(fields[8]);
+                    break;
+            }
         }
+
     }
 
 }
