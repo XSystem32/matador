@@ -124,15 +124,16 @@ public class GameBoard {
         GUI_Field[] fields = gui.getFields();
 
 
-        int a = dice.diceValue();
-        int b = dice.diceValue();
 
-        int c = a + b;
 
         while (true) {
+            int a = dice.diceValue();
+            int b = dice.diceValue();
+
+            int c = a + b;
             for (GUI_Player guiPlayer : guiPlayers) {
                 gui.getUserButtonPressed("Kast terningerne", "Kast");
-                gui.setDice(dice.diceValue(), dice.diceValue());
+                gui.setDice(a, b);
 
                 switch (c) {
                     case 2:
